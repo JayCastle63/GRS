@@ -56,14 +56,16 @@
     }
 
     .brand {
-      font-weight: 900;
-      font-size: 1.35rem;
-      line-height: 1.25;
-      margin-bottom: 30px;
-      letter-spacing: -0.01em;
+      margin-bottom: 24px;
     }
 
-    .brand span { color: var(--gold-light); }
+    .brand img {
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+      display: block;
+      filter: brightness(0) invert(1) drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+    }
 
     .nav-item {
       padding: 13px 16px;
@@ -115,67 +117,6 @@
     .content-shell {
       max-width: 960px;
       margin: 0 auto;
-    }
-
-    /* ── Hero header ── */
-    .hero {
-      background: white;
-      border: 1px solid var(--border);
-      border-top: 5px solid var(--gold);
-      border-radius: 20px;
-      padding: 28px 28px 22px;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 22px;
-    }
-
-    .hero-logo {
-      width: 180px;
-      flex: 0 0 180px;
-    }
-
-    .hero-logo img {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 6px 14px rgba(6,40,79,0.13));
-    }
-
-    .hero-text h1 {
-      font-size: 1.55rem;
-      font-weight: 900;
-      color: var(--navy);
-      line-height: 1.2;
-      margin-bottom: 6px;
-    }
-
-    .hero-text p {
-      color: var(--muted);
-      font-size: 0.93rem;
-      line-height: 1.5;
-    }
-
-    .session-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--gold-soft);
-      border: 1px solid #ead699;
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--navy);
-      margin-top: 10px;
-    }
-
-    .session-pill .dot {
-      width: 7px;
-      height: 7px;
-      background: var(--green);
-      border-radius: 50%;
     }
 
     /* ── Cards ── */
@@ -233,11 +174,19 @@
       font-family: inherit;
       border-radius: 10px;
       min-height: 46px;
+      height: 46px;
       padding: 11px 13px;
       border: 1.5px solid var(--border);
       background: white;
       color: var(--text);
       transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input[type="date"] {
+      height: 46px;
+      line-height: normal;
+      -webkit-appearance: none;
+      appearance: none;
     }
 
     input:focus, select:focus {
@@ -546,7 +495,9 @@
   <!-- Sidebar -->
   <aside class="sidebar no-print">
     <div>
-      <div class="brand">Gregg's<br><span>Restoration</span><br>Solutions LLC.</div>
+      <div class="brand">
+        <img src="GSR Logo.png" alt="Gregg's Restoration Solutions LLC">
+      </div>
       <div class="nav-item active"><span class="nav-icon">🧾</span> Tax Calculator</div>
       <div class="nav-item"><span class="nav-icon">ℹ️</span> About</div>
       <div class="nav-item"><span class="nav-icon">📞</span> Contact</div>
@@ -564,17 +515,6 @@
   <main class="main">
     <div class="content-shell">
 
-      <!-- Hero -->
-      <header class="hero no-print">
-        <div class="hero-logo">
-          <img src="GSR Logo.png" alt="Gregg's Restoration Solutions LLC Logo">
-        </div>
-        <div class="hero-text">
-          <h1>Customer Check &amp; Sales Tax Calculator</h1>
-          <p>Enter a check total and state tax rate — get the pre-tax subtotal and tax amount instantly. Generate a clean printable report for bookkeeping.</p>
-          <div class="session-pill"><span class="dot"></span> Session only — no data stored</div>
-        </div>
-      </header>
 
       <!-- Step 1: Start Here -->
       <section class="card no-print" id="startCard">
