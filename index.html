@@ -8,16 +8,17 @@
   <style>
     :root {
       --navy: #06284f;
-      --navy-2: #031b38;
+      --navy-dark: #031b38;
       --gold: #c8a13a;
-      --gold-dark: #a78219;
-      --bg: #eef5ff;
-      --card: #ffffff;
+      --gold-light: #e0bf5d;
+      --gold-soft: #f7efd8;
+      --page-bg: #eef5ff;
+      --card-bg: #ffffff;
       --text: #0b2344;
       --muted: #667085;
       --border: #d6deeb;
       --green: #057a3d;
-      --shadow: 0 18px 45px rgba(6, 40, 79, 0.14);
+      --shadow: 0 16px 40px rgba(6, 40, 79, 0.12);
       --radius: 18px;
     }
 
@@ -39,7 +40,7 @@
     }
 
     .sidebar {
-      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-dark) 100%);
       color: white;
       padding: 28px 18px;
       position: sticky;
@@ -52,30 +53,27 @@
 
     .brand-small {
       font-weight: 900;
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       line-height: 1.2;
       margin-bottom: 28px;
     }
 
     .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
       padding: 15px 16px;
-      border-radius: 10px;
+      border-radius: 12px;
       color: #eaf2ff;
       font-weight: 800;
       margin-bottom: 10px;
     }
 
     .nav-item.active {
-      background: linear-gradient(135deg, var(--gold), #e0bf5d);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
       color: var(--navy);
       box-shadow: 0 8px 20px rgba(200, 161, 58, 0.25);
     }
 
     .sidebar-footer {
-      color: rgba(255,255,255,0.55);
+      color: rgba(255, 255, 255, 0.6);
       font-size: 0.85rem;
       line-height: 1.5;
     }
@@ -85,14 +83,13 @@
     }
 
     .content-shell {
-      max-width: 980px;
+      max-width: 1000px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.68);
-      border: 1px solid rgba(214,222,235,0.9);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(214, 222, 235, 0.95);
       border-radius: 24px;
       padding: 26px;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
     }
 
     .logo-hero {
@@ -101,49 +98,42 @@
     }
 
     .logo-box {
-      width: min(430px, 92%);
-      min-height: 150px;
+      width: min(520px, 94%);
       margin: 0 auto;
-      border: 2px dashed rgba(200,161,58,0.55);
-      border-radius: 20px;
-      background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-dark);
-      font-weight: 900;
-      font-size: 1.1rem;
-      padding: 18px;
+      background: transparent;
     }
 
     .logo-box img {
-      max-width: 100%;
-      max-height: 230px;
-      object-fit: contain;
+      width: 100%;
+      max-width: 520px;
+      height: auto;
       display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 10px 22px rgba(6, 40, 79, 0.16));
+      border-radius: 8px;
     }
 
     .page-title {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      margin: 8px auto 0;
-      background: #f6f0dc;
+      justify-content: center;
+      margin: 14px auto 0;
+      background: var(--gold-soft);
       color: var(--navy);
       border: 1px solid #ead699;
       border-radius: 999px;
-      padding: 9px 16px;
+      padding: 10px 18px;
       font-weight: 900;
-      font-size: 0.95rem;
+      font-size: 0.96rem;
     }
 
     .card {
-      background: var(--card);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px;
       margin-top: 22px;
-      box-shadow: 0 10px 28px rgba(6,40,79,0.08);
+      box-shadow: 0 10px 28px rgba(6, 40, 79, 0.08);
     }
 
     .section-title {
@@ -159,11 +149,12 @@
       border: 2px solid var(--navy);
       width: 32px;
       height: 32px;
-      border-radius: 7px;
+      border-radius: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: 1rem;
+      flex: 0 0 auto;
     }
 
     label {
@@ -182,19 +173,20 @@
     input, select, button {
       width: 100%;
       font-size: 1rem;
-      border-radius: 10px;
+      border-radius: 11px;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     input, select {
       min-height: 50px;
       padding: 13px 15px;
       border: 1px solid var(--border);
-      background: #fff;
+      background: white;
       color: var(--text);
     }
 
     input:focus, select:focus {
-      outline: 3px solid rgba(200,161,58,0.28);
+      outline: 3px solid rgba(200, 161, 58, 0.28);
       border-color: var(--gold);
     }
 
@@ -212,40 +204,28 @@
     }
 
     .check-entry {
-      background: #fff;
+      background: white;
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 20px;
       margin-top: 18px;
-      box-shadow: 0 8px 22px rgba(6,40,79,0.06);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .check-entry::before {
-      content: "";
-      position: absolute;
-      top: 52px;
-      left: 20px;
-      right: 20px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold), transparent);
+      box-shadow: 0 8px 22px rgba(6, 40, 79, 0.06);
     }
 
     .check-tab {
       display: inline-block;
       background: var(--navy);
-      color: #fff;
-      padding: 13px 18px;
-      border-radius: 8px;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 10px;
       font-weight: 900;
-      margin-bottom: 24px;
-      box-shadow: 0 6px 16px rgba(6,40,79,0.2);
+      margin-bottom: 18px;
+      box-shadow: 0 6px 16px rgba(6, 40, 79, 0.2);
     }
 
     .lookup-stack button {
       margin-top: 10px;
-      background: #fff;
+      background: white;
       color: var(--navy);
       border: 2px solid var(--navy);
     }
@@ -256,6 +236,18 @@
       color: var(--muted);
       font-size: 0.88rem;
       line-height: 1.35;
+    }
+
+    .tax-helper {
+      background: #f8fbff;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--gold);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      color: var(--navy);
+      font-size: 0.92rem;
+      line-height: 1.4;
     }
 
     .btn-row {
@@ -275,7 +267,7 @@
 
     button:hover {
       opacity: 0.94;
-      box-shadow: 0 8px 18px rgba(6,40,79,0.12);
+      box-shadow: 0 8px 18px rgba(6, 40, 79, 0.12);
     }
 
     button:active {
@@ -284,11 +276,11 @@
 
     .primary-btn {
       background: var(--navy);
-      color: #fff;
+      color: white;
     }
 
     .gold-btn {
-      background: linear-gradient(135deg, var(--gold), #dabb58);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
       color: var(--navy);
     }
 
@@ -325,7 +317,15 @@
       border-radius: 16px;
       padding: 18px;
       margin-bottom: 18px;
-      box-shadow: 0 8px 18px rgba(6,40,79,0.08);
+      box-shadow: 0 8px 18px rgba(6, 40, 79, 0.08);
+    }
+
+    #companyHeader img {
+      max-width: 260px;
+      width: 70%;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
     }
 
     #companyHeader h2 {
@@ -345,13 +345,13 @@
     }
 
     .result {
-      background: #fff;
+      background: white;
       border: 1px solid var(--border);
       border-left: 7px solid var(--green);
       border-radius: 14px;
       padding: 18px;
       margin: 16px 0;
-      box-shadow: 0 8px 18px rgba(6,40,79,0.07);
+      box-shadow: 0 8px 18px rgba(6, 40, 79, 0.07);
     }
 
     .result h3 {
@@ -447,7 +447,7 @@
       }
 
       body {
-        background: #fff !important;
+        background: white !important;
         margin: 0 !important;
         padding: 0 !important;
       }
@@ -478,6 +478,10 @@
         margin-bottom: 16px !important;
       }
 
+      #companyHeader img {
+        max-width: 220px !important;
+      }
+
       .result {
         box-shadow: none !important;
         border: 1px solid #ccc !important;
@@ -505,9 +509,9 @@
     <aside class="sidebar no-print">
       <div>
         <div class="brand-small">Gregg's<br>Restoration<br>Solutions LLC.</div>
-        <div class="nav-item active">▦ Tax Calculator</div>
-        <div class="nav-item">ⓘ About</div>
-        <div class="nav-item">☎ Contact</div>
+        <div class="nav-item active">Tax Calculator</div>
+        <div class="nav-item">About</div>
+        <div class="nav-item">Contact</div>
       </div>
 
       <div class="sidebar-footer">
@@ -520,16 +524,13 @@
       <div class="content-shell">
         <header class="logo-hero no-print">
           <div class="logo-box" id="logoBox">
-            <span>Upload logo later<br><small>Save as logo.png in GitHub</small></span>
-            <!-- When ready, replace the span above with:
-            <img src="logo.png" alt="Gregg's Restoration Solutions LLC logo">
-            -->
+            <img src="GSR Logo.png" alt="Gregg's Restoration Solutions LLC Logo">
           </div>
-          <div class="page-title">Tax Calculator</div>
+          <div class="page-title">Customer Check & Sales Tax Calculator</div>
         </header>
 
         <section class="card no-print">
-          <h2 class="section-title"><span class="icon">▦</span>Start Here</h2>
+          <h2 class="section-title"><span class="icon">1</span>Start Here</h2>
           <div class="start-row">
             <div>
               <label for="numChecks">How many checks do you plan to enter?</label>
@@ -544,13 +545,14 @@
         </section>
 
         <form id="checkForm" class="card hidden no-print">
-          <h2 class="section-title"><span class="icon">▤</span>Check Details</h2>
+          <h2 class="section-title"><span class="icon">2</span>Check Details</h2>
           <div id="checksContainer"></div>
-          <button class="gold-btn" type="submit">▦ Calculate</button>
+          <button class="gold-btn" type="submit">Calculate</button>
         </form>
 
         <div id="printArea" class="hidden">
           <div id="companyHeader">
+            <img src="GSR Logo.png" alt="Gregg's Restoration Solutions LLC Logo">
             <h2>Gregg's Restoration Solutions LLC.</h2>
             <p>41 Adirondack Ave, Spotswood NJ, 08884</p>
             <p>Phone: (732) 857 - 5839</p>
@@ -560,37 +562,50 @@
         </div>
 
         <div id="actionButtons" class="no-print">
-          <button class="primary-btn" type="button" onclick="window.print()">🖨️ Print / Save as PDF</button>
-          <button class="secondary-btn" type="button" onclick="exportToCSV()">🗂️ Export to CSV</button>
+          <button class="primary-btn" type="button" onclick="window.print()">Print / Save as PDF</button>
+          <button class="secondary-btn" type="button" onclick="exportToCSV()">Export to CSV</button>
         </div>
 
         <div class="privacy-note no-print">
-          🔒 Your data is never stored. This session ends when you close or refresh the page.
+          Your data is never stored. This session ends when you close or refresh the page.
         </div>
       </div>
     </main>
   </div>
 
   <script>
+    const DEFAULT_RATES = {
+      NJ: "6.625",
+      PA: "6.000",
+      NY: "8.000"
+    };
+
     function money(value) {
       return "$" + Number(value).toFixed(2);
     }
 
     function percent(value) {
-      return Number(value).toFixed(3).replace(/0+$/, "").replace(/\.$/, "") + "%";
+      return Number(value).toFixed(3).replace(/0+$/, "").replace(/\\.$/, "") + "%";
     }
 
     function cleanZip(raw) {
-      return String(raw || "").replace(/\D/g, "").slice(0, 5);
+      return String(raw || "").replace(/\\D/g, "").slice(0, 5);
     }
 
     function openTaxLookup(index) {
-      const zip = cleanZip(document.getElementById(`zip${index}`).value);
-      const url = zip
-        ? `https://www.salestaxhandbook.com/sales-tax-calculator?zip=${zip}`
-        : "https://www.salestaxhandbook.com/sales-tax-calculator";
+      window.open(
+        "https://www.taxjar.com/sales-tax-calculator",
+        "_blank",
+        "noopener,noreferrer,width=1050,height=850"
+      );
+    }
 
-      window.open(url, "_blank", "noopener,noreferrer,width=900,height=700");
+    function applyStateRate(index) {
+      const stateSelect = document.querySelector(`[name="state${index}"]`);
+      const rateInput = document.querySelector(`[name="rate${index}"]`);
+      if (stateSelect && rateInput && DEFAULT_RATES[stateSelect.value]) {
+        rateInput.value = DEFAULT_RATES[stateSelect.value];
+      }
     }
 
     function generateForms() {
@@ -635,24 +650,29 @@
 
             <div>
               <label>State</label>
-              <select name="state${i}" required>
+              <select name="state${i}" required onchange="applyStateRate(${i})">
                 <option value="">Select</option>
                 <option value="NJ">New Jersey</option>
                 <option value="PA">Pennsylvania</option>
                 <option value="NY">New York</option>
               </select>
+              <span class="small-note">Selecting a state fills in a default rate. Confirm local rates when needed.</span>
             </div>
 
             <div class="lookup-stack">
               <label>ZIP Code <span class="optional">(optional)</span></label>
               <input type="text" inputmode="numeric" maxlength="10" name="zip${i}" id="zip${i}" placeholder="Example: 08884">
-              <button type="button" onclick="openTaxLookup(${i})">Lookup Tax Rate ↗</button>
+              <button type="button" onclick="openTaxLookup(${i})">Find Tax Rate on TaxJar</button>
             </div>
           </div>
 
           <label>Tax Rate %</label>
           <input type="number" step="0.001" min="0" name="rate${i}" required placeholder="Example: 6.625">
-          <span class="small-note">Enter the percentage shown from the lookup site. Example: 6.625, not 0.06625.</span>
+
+          <div class="tax-helper">
+            To verify the latest local rate, click <strong>Find Tax Rate on TaxJar</strong>, enter the ZIP code on TaxJar, then type the shown percentage here.
+            Example: enter <strong>6.625</strong>, not 0.06625.
+          </div>
         `;
 
         container.appendChild(div);
@@ -741,14 +761,14 @@
 
         const checkNum = block.querySelector("h3")?.textContent?.split(" ")[1] || "";
         const values = Array.from(block.querySelectorAll(".result-line")).map(line => {
-          const raw = line.textContent.split(":").slice(1).join(":").trim().replace(/\$/g, "");
+          const raw = line.textContent.split(":").slice(1).join(":").trim().replace(/\\$/g, "");
           return `"${raw.replace(/"/g, '""')}"`;
         });
 
         rows.push([`"${checkNum}"`, ...values].join(","));
       });
 
-      const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const blob = new Blob([rows.join("\\n")], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
 
