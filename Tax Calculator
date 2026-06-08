@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gregg's Restoration Solutions LLC Tax Calculator</title>
+  <style>
+    :root{--navy:#0b2d5c;--royal:#174ea6;--blue:#dbe9ff;--gold:#c7a100;--white:#fff;--text:#172033;--muted:#667085;--border:#cfd7e6;--green:#007a3d;--shadow:0 14px 35px rgba(11,45,92,.15)}
+    *{box-sizing:border-box}
+    body{margin:0;padding:28px 14px;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,var(--blue),#f4f8ff);color:var(--text)}
+    .app{max-width:920px;margin:0 auto}
+    .header{background:var(--navy);color:white;border-radius:20px;padding:28px 22px;text-align:center;box-shadow:var(--shadow);border-top:7px solid var(--gold)}
+    .logo-placeholder{width:86px;height:86px;border-radius:50%;margin:0 auto 14px;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:800;background:rgba(255,255,255,.08)}
+    .header h1{margin:0;color:var(--gold);font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.1}
+    .header p{margin:12px auto 0;max-width:650px;color:#edf4ff;line-height:1.45}
+    .card{background:rgba(255,255,255,.95);border:1px solid var(--border);border-radius:18px;padding:22px;margin-top:22px;box-shadow:var(--shadow)}
+    .section-title{margin:0 0 14px;color:var(--navy);font-size:1.35rem}
+    .instructions{background:#fff8d7;border:1px solid #efd070;border-left:6px solid var(--gold);border-radius:12px;padding:12px 14px;color:#5b4700;line-height:1.45;margin-top:16px}
+    label{display:block;font-weight:700;color:var(--navy);margin:14px 0 6px}
+    input,select,button{width:100%;font-size:1rem;border-radius:11px}
+    input,select{min-height:47px;padding:12px 14px;border:1px solid var(--border);background:white;color:var(--text)}
+    input:focus,select:focus{outline:3px solid rgba(23,78,166,.18);border-color:var(--royal)}
+    .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .check-entry{background:white;border:1px solid var(--border);border-radius:16px;padding:20px;margin-top:18px;box-shadow:0 6px 16px rgba(11,45,92,.08)}
+    .check-entry h3{margin:0 0 12px;color:var(--navy);font-size:1.2rem}
+    .small-note{display:block;color:var(--muted);font-size:.86rem;margin-top:5px;line-height:1.35}
+    .button-row{display:flex;gap:12px;margin-top:18px}
+    button{min-height:48px;padding:13px 16px;border:none;font-weight:800;cursor:pointer}
+    button:hover{opacity:.93}.primary-btn{background:var(--royal);color:white}.gold-btn{background:var(--gold);color:var(--navy)}.secondary-btn{background:#f2f4f7;color:var(--navy);border:1px solid var(--border)}
+    .hidden{display:none!important}
+    #printArea{margin-top:24px}
+    #companyHeader{text-align:center;background:white;border:1px solid var(--border);border-top:7px solid var(--gold);border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:0 6px 16px rgba(11,45,92,.08)}
+    #companyHeader h2{margin:0 0 6px;color:var(--navy)}#companyHeader p{margin:3px 0;color:#344054}.print-date{margin-top:8px!important;color:var(--muted)!important;font-size:.9rem}
+    .result{background:white;border:1px solid var(--border);border-left:7px solid var(--green);border-radius:14px;padding:18px;margin:16px 0;box-shadow:0 6px 16px rgba(11,45,92,.08)}
+    .result h3{margin:0 0 12px;color:#00401f;font-size:1.2rem}
+    .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}.result-line{margin:0;padding:7px 0;border-bottom:1px solid #edf2f7}.result-line strong{color:var(--navy)}
+    .money{font-weight:900;color:var(--navy)}.summary{border-left-color:var(--gold);background:#fffdf2}.summary h3{color:#9a7b00}
+    #actionButtons{display:none;gap:12px;margin-top:18px}#actionButtons.visible{display:flex}
+    .tax-link-row{display:flex;gap:10px;align-items:flex-end}.tax-link-row>div{flex:1}.mini-btn{min-height:47px;white-space:nowrap;padding:10px 12px;font-size:.95rem}
+    @media(max-width:740px){body{padding:18px 10px}.row,.result-grid{grid-template-columns:1fr}.button-row,#actionButtons.visible,.tax-link-row{flex-direction:column}.header{padding:22px 16px}}
+    @media print{@page{margin:.5in}body{background:white!important;margin:0!important;padding:0!important}body>*{display:none!important}.app{display:block!important;max-width:none!important;margin:0!important;padding:0!important}#printArea,#printArea *{display:block!important;visibility:visible!important}#printArea{margin:0!important}#companyHeader{box-shadow:none!important;border:1px solid #222!important;border-top:5px solid #000!important;border-radius:0!important;margin-bottom:16px!important}.result{box-shadow:none!important;border:1px solid #ccc!important;border-left:6px solid #000!important;break-inside:avoid;page-break-inside:avoid}.result-grid{display:grid!important;grid-template-columns:1fr 1fr!important}#actionButtons,.no-print{display:none!important}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header no-print">
+      <div class="logo-placeholder">LOGO</div>
+      <h1>Gregg's Restoration Solutions LLC Tax Calculator</h1>
+      <p>Simple check breakdown tool for subtotal, tax, and total. Nothing is saved or stored. Closing the page clears the session.</p>
+    </div>
+
+    <div class="card no-print">
+      <h2 class="section-title">Start Here</h2>
+      <label for="numChecks">How many checks do you plan to enter?</label>
+      <input type="number" id="numChecks" min="1" placeholder="Example: 2" />
+      <div class="button-row">
+        <button class="primary-btn" type="button" onclick="generateForms()">Next</button>
+        <button class="secondary-btn" type="button" onclick="resetTool()">Reset</button>
+      </div>
+      <div class="instructions">This page does not store customer data. Use the tax-rate lookup link for the latest rate, then enter that percentage into the Tax Rate field.</div>
+    </div>
+
+    <form id="checkForm" class="card hidden no-print">
+      <h2 class="section-title">Check Details</h2>
+      <div id="checksContainer"></div>
+      <div class="button-row"><button class="gold-btn" type="submit">Calculate</button></div>
+    </form>
+
+    <div id="printArea" class="hidden">
+      <div id="companyHeader">
+        <h2>Gregg's Restoration Solutions LLC.</h2>
+        <p>41 Adirondack Ave, Spotswood NJ, 08884</p>
+        <p>Phone: (732) 857 - 5839</p>
+        <p class="print-date" id="printDate"></p>
+      </div>
+      <div id="results"></div>
+    </div>
+
+    <div id="actionButtons" class="no-print">
+      <button class="primary-btn" type="button" onclick="window.print()">🖨️ Print / Save as PDF</button>
+      <button class="secondary-btn" type="button" onclick="exportToCSV()">🗂️ Export to CSV</button>
+    </div>
+  </div>
+
+  <script>
+    function money(value){return "$"+Number(value).toFixed(2)}
+    function percent(value){return Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,"")+"%"}
+    function cleanZip(raw){return String(raw||"").replace(/\D/g,"").slice(0,5)}
+    function openTaxLookup(index){
+      const zip=cleanZip(document.getElementById(`zip${index}`).value);
+      const url=zip?`https://www.salestaxhandbook.com/sales-tax-calculator?zip=${zip}`:"https://www.salestaxhandbook.com/sales-tax-calculator";
+      window.open(url,"_blank","noopener,noreferrer,width=900,height=700");
+    }
+    function generateForms(){
+      const numChecks=parseInt(document.getElementById("numChecks").value,10);
+      const container=document.getElementById("checksContainer");
+      container.innerHTML="";
+      document.getElementById("printArea").classList.add("hidden");
+      document.getElementById("actionButtons").classList.remove("visible");
+      if(isNaN(numChecks)||numChecks<1){alert("Please enter how many checks you want to calculate.");return;}
+      for(let i=1;i<=numChecks;i++){
+        const div=document.createElement("div");
+        div.className="check-entry";
+        div.innerHTML=`
+          <h3>Check ${i}</h3>
+          <div class="row">
+            <div><label>Business/Customer Name <span class="small-note">(optional)</span></label><input type="text" name="name${i}" placeholder="Customer or business name"></div>
+            <div><label>Check Date <span class="small-note">(optional)</span></label><input type="date" name="date${i}"></div>
+          </div>
+          <div class="row">
+            <div><label>Check Number <span class="small-note">(optional)</span></label><input type="text" name="checkno${i}" placeholder="Example: 123"></div>
+            <div><label>Total Amount on Check</label><input type="number" step="0.01" min="0" name="total${i}" required placeholder="Example: 550.00"></div>
+          </div>
+          <div class="row">
+            <div><label>State</label><select name="state${i}" required><option value="">Select</option><option value="NJ">New Jersey</option><option value="PA">Pennsylvania</option><option value="NY">New York</option></select></div>
+            <div class="tax-link-row">
+              <div><label>ZIP Code <span class="small-note">(optional, for lookup link)</span></label><input type="text" inputmode="numeric" maxlength="10" name="zip${i}" id="zip${i}" placeholder="Example: 08884"></div>
+              <button class="secondary-btn mini-btn" type="button" onclick="openTaxLookup(${i})">Lookup Tax Rate</button>
+            </div>
+          </div>
+          <label>Tax Rate %</label>
+          <input type="number" step="0.001" min="0" name="rate${i}" required placeholder="Example: 6.625">
+          <span class="small-note">Enter the percentage shown from the lookup site. Example: 6.625, not 0.06625.</span>`;
+        container.appendChild(div);
+      }
+      document.getElementById("checkForm").classList.remove("hidden");
+    }
+    document.getElementById("checkForm").addEventListener("submit",function(e){
+      e.preventDefault();
+      const resultsDiv=document.getElementById("results");
+      const formData=new FormData(e.target);
+      const numChecks=parseInt(document.getElementById("numChecks").value,10);
+      resultsDiv.innerHTML="";
+      document.getElementById("printDate").textContent="Printed: "+new Date().toLocaleString();
+      let totalSubtotal=0,totalTax=0,totalTotal=0;
+      for(let i=1;i<=numChecks;i++){
+        const name=formData.get(`name${i}`)||"N/A",date=formData.get(`date${i}`)||"N/A",checkno=formData.get(`checkno${i}`)||"N/A";
+        const zip=cleanZip(formData.get(`zip${i}`))||"N/A",total=parseFloat(formData.get(`total${i}`)),state=formData.get(`state${i}`),ratePercent=parseFloat(formData.get(`rate${i}`));
+        if(!state||isNaN(total)||isNaN(ratePercent)){alert(`Please complete Check ${i}.`);return;}
+        const taxRate=ratePercent/100,subtotal=total/(1+taxRate),tax=total-subtotal;
+        totalSubtotal+=subtotal;totalTax+=tax;totalTotal+=total;
+        const result=document.createElement("div");
+        result.className="result";
+        result.innerHTML=`<h3>Check ${i} - ${state}</h3><div class="result-grid">
+          <p class="result-line"><strong>Customer:</strong> ${name}</p>
+          <p class="result-line"><strong>Date:</strong> ${date}</p>
+          <p class="result-line"><strong>Check No.:</strong> ${checkno}</p>
+          <p class="result-line"><strong>ZIP:</strong> ${zip}</p>
+          <p class="result-line"><strong>Tax Rate:</strong> ${percent(ratePercent)}</p>
+          <p class="result-line"><strong>Total on Check:</strong> <span class="money">${money(total)}</span></p>
+          <p class="result-line"><strong>Subtotal before tax:</strong> <span class="money">${money(subtotal)}</span></p>
+          <p class="result-line"><strong>Tax:</strong> <span class="money">${money(tax)}</span></p></div>`;
+        resultsDiv.appendChild(result);
+      }
+      const summary=document.createElement("div");
+      summary.className="result summary";
+      summary.innerHTML=`<h3>Summary Totals</h3><div class="result-grid">
+        <p class="result-line"><strong>Total Subtotal:</strong> <span class="money">${money(totalSubtotal)}</span></p>
+        <p class="result-line"><strong>Total Tax:</strong> <span class="money">${money(totalTax)}</span></p>
+        <p class="result-line"><strong>Grand Total:</strong> <span class="money">${money(totalTotal)}</span></p></div>`;
+      resultsDiv.appendChild(summary);
+      document.getElementById("printArea").classList.remove("hidden");
+      document.getElementById("actionButtons").classList.add("visible");
+      document.getElementById("printArea").scrollIntoView({behavior:"smooth"});
+    });
+    function exportToCSV(){
+      const rows=[];
+      rows.push(["Check #","Customer","Date","Check No.","ZIP","Tax Rate","Total","Subtotal","Tax"].join(","));
+      document.querySelectorAll(".result").forEach(block=>{
+        if(block.querySelector("h3")?.textContent.includes("Summary"))return;
+        const checkNum=block.querySelector("h3")?.textContent?.split(" ")[1]||"";
+        const values=Array.from(block.querySelectorAll(".result-line")).map(line=>{
+          const raw=line.textContent.split(":").slice(1).join(":").trim().replace(/\$/g,"");
+          return `"${raw.replace(/"/g,'""')}"`;
+        });
+        rows.push([`"${checkNum}"`,...values].join(","));
+      });
+      const blob=new Blob([rows.join("\n")],{type:"text/csv;charset=utf-8;"});
+      const url=URL.createObjectURL(blob);
+      const link=document.createElement("a");
+      link.href=url;link.download="greggs_tax_summary.csv";
+      document.body.appendChild(link);link.click();document.body.removeChild(link);
+    }
+    function resetTool(){
+      document.getElementById("numChecks").value="";
+      document.getElementById("checksContainer").innerHTML="";
+      document.getElementById("results").innerHTML="";
+      document.getElementById("checkForm").classList.add("hidden");
+      document.getElementById("printArea").classList.add("hidden");
+      document.getElementById("actionButtons").classList.remove("visible");
+    }
+  </script>
+</body>
+</html>
