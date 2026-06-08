@@ -9,36 +9,39 @@
     :root {
       --navy: #06284f;
       --navy-dark: #031b38;
+      --navy-mid: #0d3d6e;
       --gold: #c8a13a;
       --gold-light: #e0bf5d;
       --gold-soft: #f7efd8;
+      --gold-dark: #a07a1e;
       --page-bg: #eef5ff;
       --card-bg: #ffffff;
       --text: #0b2344;
       --muted: #667085;
       --border: #d6deeb;
       --green: #057a3d;
+      --green-bg: #f0faf5;
       --shadow: 0 16px 40px rgba(6, 40, 79, 0.12);
       --radius: 18px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       background: linear-gradient(135deg, #d8e8ff 0%, #f8fbff 100%);
       color: var(--text);
+      min-height: 100vh;
     }
 
+    /* ── Layout ── */
     .layout {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 245px 1fr;
+      grid-template-columns: 240px 1fr;
     }
 
+    /* ── Sidebar ── */
     .sidebar {
       background: linear-gradient(180deg, var(--navy) 0%, var(--navy-dark) 100%);
       color: white;
@@ -49,744 +52,1157 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      overflow: hidden;
     }
 
-    .brand-small {
+    .brand {
       font-weight: 900;
-      font-size: 1.4rem;
-      line-height: 1.2;
-      margin-bottom: 28px;
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin-bottom: 30px;
+      letter-spacing: -0.01em;
     }
+
+    .brand span { color: var(--gold-light); }
 
     .nav-item {
-      padding: 15px 16px;
-      border-radius: 12px;
-      color: #eaf2ff;
-      font-weight: 800;
-      margin-bottom: 10px;
+      padding: 13px 16px;
+      border-radius: 11px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 700;
+      font-size: 0.93rem;
+      margin-bottom: 6px;
+      cursor: default;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+
+    .nav-item .nav-icon { font-size: 1rem; opacity: 0.8; }
 
     .nav-item.active {
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
       color: var(--navy);
-      box-shadow: 0 8px 20px rgba(200, 161, 58, 0.25);
+      box-shadow: 0 6px 18px rgba(200,161,58,0.28);
+      font-weight: 900;
+    }
+
+    .nav-item.active .nav-icon { opacity: 1; }
+
+    .sidebar-badge {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+      margin-top: 14px;
     }
 
     .sidebar-footer {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
       line-height: 1.5;
     }
 
+    /* ── Main ── */
     .main {
-      padding: 34px 28px 48px;
+      padding: 32px 26px 60px;
     }
 
     .content-shell {
-      max-width: 1000px;
+      max-width: 960px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(214, 222, 235, 0.95);
-      border-radius: 24px;
-      padding: 26px;
+    }
+
+    /* ── Hero header ── */
+    .hero {
+      background: white;
+      border: 1px solid var(--border);
+      border-top: 5px solid var(--gold);
+      border-radius: 20px;
+      padding: 28px 28px 22px;
       box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 22px;
     }
 
-    .logo-hero {
-      text-align: center;
-      padding: 8px 0 22px;
+    .hero-logo {
+      width: 180px;
+      flex: 0 0 180px;
     }
 
-    .logo-box {
-      width: min(520px, 94%);
-      margin: 0 auto;
-      background: transparent;
-    }
-
-    .logo-box img {
+    .hero-logo img {
       width: 100%;
-      max-width: 520px;
       height: auto;
       display: block;
-      margin: 0 auto;
-      filter: drop-shadow(0 10px 22px rgba(6, 40, 79, 0.16));
-      border-radius: 8px;
+      filter: drop-shadow(0 6px 14px rgba(6,40,79,0.13));
     }
 
-    .page-title {
+    .hero-text h1 {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .session-pill {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      margin: 14px auto 0;
+      gap: 6px;
       background: var(--gold-soft);
-      color: var(--navy);
       border: 1px solid #ead699;
       border-radius: 999px;
-      padding: 10px 18px;
-      font-weight: 900;
-      font-size: 0.96rem;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-top: 10px;
     }
 
+    .session-pill .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    /* ── Cards ── */
     .card {
-      background: var(--card-bg);
+      background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px;
-      margin-top: 22px;
-      box-shadow: 0 10px 28px rgba(6, 40, 79, 0.08);
+      margin-bottom: 18px;
+      box-shadow: 0 8px 26px rgba(6,40,79,0.07);
     }
 
-    .section-title {
-      margin: 0 0 18px;
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 900;
       color: var(--navy);
-      font-size: 1.55rem;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .section-title .icon {
-      border: 2px solid var(--navy);
-      width: 32px;
-      height: 32px;
+    .step-badge {
+      background: var(--navy);
+      color: white;
+      width: 28px;
+      height: 28px;
       border-radius: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 0.85rem;
+      font-weight: 900;
       flex: 0 0 auto;
     }
 
+    /* ── Form elements ── */
     label {
       display: block;
-      font-weight: 900;
+      font-weight: 800;
       color: var(--navy);
-      margin: 14px 0 7px;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
     }
 
     .optional {
       color: var(--muted);
-      font-weight: 700;
-      font-size: 0.88rem;
-    }
-
-    input, select, button {
-      width: 100%;
-      font-size: 1rem;
-      border-radius: 11px;
-      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
     }
 
     input, select {
-      min-height: 50px;
-      padding: 13px 15px;
-      border: 1px solid var(--border);
+      width: 100%;
+      font-size: 0.97rem;
+      font-family: inherit;
+      border-radius: 10px;
+      min-height: 46px;
+      padding: 11px 13px;
+      border: 1.5px solid var(--border);
       background: white;
       color: var(--text);
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     input:focus, select:focus {
-      outline: 3px solid rgba(200, 161, 58, 0.28);
+      outline: none;
       border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(200,161,58,0.18);
     }
+
+    input.error { border-color: #e03b3b; }
+
+    .field { margin-bottom: 0; }
 
     .start-row {
       display: grid;
-      grid-template-columns: 1fr 160px;
-      gap: 14px;
+      grid-template-columns: 1fr 150px;
+      gap: 12px;
       align-items: end;
     }
 
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 18px;
     }
 
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px 18px;
+    }
+
+    /* ── Check entry ── */
     .check-entry {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      background: #fafcff;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
       padding: 20px;
-      margin-top: 18px;
-      box-shadow: 0 8px 22px rgba(6, 40, 79, 0.06);
+      margin-bottom: 16px;
     }
 
-    .check-tab {
-      display: inline-block;
+    .check-entry:last-child { margin-bottom: 0; }
+
+    .check-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .check-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: var(--navy);
       color: white;
-      padding: 12px 18px;
-      border-radius: 10px;
+      padding: 9px 16px;
+      border-radius: 9px;
       font-weight: 900;
-      margin-bottom: 18px;
-      box-shadow: 0 6px 16px rgba(6, 40, 79, 0.2);
+      font-size: 0.93rem;
+      box-shadow: 0 4px 12px rgba(6,40,79,0.18);
     }
 
-    .lookup-stack button {
-      margin-top: 10px;
-      background: white;
-      color: var(--navy);
-      border: 2px solid var(--navy);
-    }
-
-    .small-note {
-      display: block;
-      margin-top: 7px;
-      color: var(--muted);
+    /* Live preview bar */
+    .live-preview {
+      display: none;
+      background: var(--green-bg);
+      border: 1px solid #b3e4cc;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-top: 14px;
       font-size: 0.88rem;
-      line-height: 1.35;
+      color: #054d27;
+      gap: 18px;
+      flex-wrap: wrap;
     }
 
+    .live-preview.active { display: flex; }
+    .live-preview strong { font-weight: 900; }
+
+    .preview-item { display: flex; flex-direction: column; gap: 1px; }
+    .preview-item .lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+    .preview-item .val { font-weight: 900; font-size: 1rem; }
+
+    /* Tax helper */
     .tax-helper {
       background: #f8fbff;
       border: 1px solid var(--border);
-      border-left: 5px solid var(--gold);
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-top: 14px;
-      color: var(--navy);
-      font-size: 0.92rem;
-      line-height: 1.4;
+      border-left: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 10px 13px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.45;
     }
+
+    .hint { display: block; margin-top: 5px; color: var(--muted); font-size: 0.82rem; }
+
+    /* ── Buttons ── */
+    button {
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      padding: 12px 18px;
+      min-height: 46px;
+      transition: transform 0.07s ease, opacity 0.14s ease, box-shadow 0.14s ease;
+    }
+
+    button:hover { opacity: 0.9; box-shadow: 0 6px 16px rgba(6,40,79,0.13); }
+    button:active { transform: translateY(1px); }
+
+    .btn-navy { background: var(--navy); color: white; }
+    .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--navy); }
+    .btn-outline { background: white; color: var(--navy); border: 1.5px solid var(--border); }
+    .btn-ghost { background: #f2f4f7; color: var(--navy); }
+    .btn-sm { min-height: 36px; padding: 8px 14px; font-size: 0.84rem; }
+    .btn-full { width: 100%; }
 
     .btn-row {
       display: flex;
-      gap: 14px;
-      margin-top: 18px;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
     }
 
-    button {
-      min-height: 52px;
-      padding: 14px 18px;
-      border: none;
-      font-weight: 900;
-      cursor: pointer;
-      transition: transform 0.08s ease, opacity 0.16s ease, box-shadow 0.16s ease;
+    /* ── Results ── */
+    #resultsSection { display: none; }
+    #resultsSection.visible { display: block; }
+
+    .results-table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(6,40,79,0.06);
     }
 
-    button:hover {
-      opacity: 0.94;
-      box-shadow: 0 8px 18px rgba(6, 40, 79, 0.12);
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
     }
 
-    button:active {
-      transform: translateY(1px);
-    }
-
-    .primary-btn {
+    thead th {
       background: var(--navy);
       color: white;
+      text-align: left;
+      padding: 11px 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
     }
 
-    .gold-btn {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    thead th:first-child { border-radius: 0; }
+
+    tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #edf2f7;
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:nth-child(even) td { background: #f8fafd; }
+    tbody tr:hover td { background: #f0f6ff; }
+
+    .td-money {
+      text-align: right;
+      font-weight: 800;
+      white-space: nowrap;
       color: var(--navy);
     }
 
-    .secondary-btn {
-      background: #f2f4f7;
+    .td-total {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    /* Totals row */
+    .tfoot-row td {
+      background: var(--gold-soft) !important;
+      font-weight: 900;
+      border-top: 2px solid var(--gold);
       color: var(--navy);
+    }
+
+    /* Summary cards */
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .summary-card {
+      background: white;
       border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(6,40,79,0.06);
     }
 
+    .summary-card .sc-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 6px;
+    }
+
+    .summary-card .sc-value {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--navy);
+    }
+
+    .summary-card.grand .sc-value { color: var(--green); }
+    .summary-card.grand { border-color: #b3e4cc; background: var(--green-bg); }
+
+    /* ── Action buttons ── */
+    .action-bar {
+      display: none;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .action-bar.visible { display: flex; }
+
+    /* ── Privacy note ── */
     .privacy-note {
       text-align: center;
       background: #f8fbff;
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      color: var(--navy);
-      font-weight: 800;
-      margin-top: 22px;
+      border-radius: 12px;
+      padding: 12px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-top: 20px;
     }
 
-    .hidden {
-      display: none !important;
+    /* ── Hidden ── */
+    .hidden { display: none !important; }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--navy);
+      color: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(6,40,79,0.2);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+      z-index: 9999;
     }
 
-    #printArea {
-      margin-top: 24px;
-    }
+    .toast.show { transform: translateY(0); opacity: 1; }
 
-    #companyHeader {
-      text-align: center;
-      background: white;
-      border: 1px solid var(--border);
-      border-top: 6px solid var(--gold);
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 18px rgba(6, 40, 79, 0.08);
-    }
-
-    #companyHeader img {
-      max-width: 260px;
-      width: 70%;
-      height: auto;
-      display: block;
-      margin: 0 auto 10px;
-    }
-
-    #companyHeader h2 {
-      margin: 0 0 6px;
-      color: var(--navy);
-    }
-
-    #companyHeader p {
-      margin: 3px 0;
-      color: #344054;
-    }
-
-    .print-date {
-      color: var(--muted) !important;
-      font-size: 0.9rem;
-      margin-top: 8px !important;
-    }
-
-    .result {
-      background: white;
-      border: 1px solid var(--border);
-      border-left: 7px solid var(--green);
-      border-radius: 14px;
-      padding: 18px;
-      margin: 16px 0;
-      box-shadow: 0 8px 18px rgba(6, 40, 79, 0.07);
-    }
-
-    .result h3 {
-      margin: 0 0 12px;
-      color: #00401f;
-      font-size: 1.25rem;
-    }
-
-    .result-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 18px;
-    }
-
-    .result-line {
-      margin: 0;
-      padding: 8px 0;
-      border-bottom: 1px solid #edf2f7;
-    }
-
-    .result-line strong {
-      color: var(--navy);
-    }
-
-    .money {
-      font-weight: 900;
-      color: var(--navy);
-    }
-
-    .summary {
-      border-left-color: var(--gold);
-      background: #fffdf2;
-    }
-
-    .summary h3 {
-      color: var(--gold-dark);
-    }
-
-    #actionButtons {
-      display: none;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    #actionButtons.visible {
-      display: flex;
-    }
-
-    @media (max-width: 880px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: relative;
-        height: auto;
-        padding: 18px;
-      }
-
-      .brand-small {
-        margin-bottom: 14px;
-      }
-
-      .sidebar-footer {
-        display: none;
-      }
-
-      .main {
-        padding: 18px 10px 36px;
-      }
-
-      .content-shell {
-        padding: 14px;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .grid-2,
-      .start-row,
-      .result-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .btn-row,
-      #actionButtons.visible {
-        flex-direction: column;
-      }
-    }
-
+    /* ── Print ── */
     @media print {
-      @page {
-        margin: 0.5in;
-      }
+      body { background: white !important; }
+      .no-print, .sidebar, .action-bar, .hero, .privacy-note { display: none !important; }
 
-      body {
-        background: white !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
+      .layout { grid-template-columns: 1fr !important; }
+      .main { padding: 0 !important; }
 
-      body > * {
-        display: none !important;
-      }
+      .card { border: 1px solid #ccc !important; box-shadow: none !important; }
 
-      .layout,
-      .main,
-      .content-shell,
-      #printArea,
-      #printArea * {
-        display: block !important;
-        visibility: visible !important;
-        max-width: none !important;
-        box-shadow: none !important;
-      }
+      .results-table-wrap { border: 1px solid #ccc !important; box-shadow: none !important; }
 
-      #printArea {
-        margin: 0 !important;
-      }
+      thead th { background: #06284f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-      #companyHeader {
-        border-radius: 0 !important;
-        border: 1px solid #222 !important;
-        border-top: 5px solid #000 !important;
-        margin-bottom: 16px !important;
-      }
+      .tfoot-row td { background: #f6f0dc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
 
-      #companyHeader img {
-        max-width: 220px !important;
-      }
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; padding: 18px; }
+      .sidebar-footer { display: none; }
+      .hero { flex-direction: column; text-align: center; }
+      .hero-logo { width: 140px; }
+    }
 
-      .result {
-        box-shadow: none !important;
-        border: 1px solid #ccc !important;
-        border-left: 6px solid #000 !important;
-        page-break-inside: avoid;
-        break-inside: avoid;
-      }
-
-      .result-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-      }
-
-      .sidebar,
-      .no-print,
-      #actionButtons {
-        display: none !important;
-      }
+    @media (max-width: 680px) {
+      .main { padding: 16px 10px 40px; }
+      .grid-2, .grid-3, .start-row, .summary-row { grid-template-columns: 1fr; }
+      .btn-row, .action-bar.visible { flex-direction: column; }
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 </head>
 
 <body>
-  <div class="layout">
-    <aside class="sidebar no-print">
-      <div>
-        <div class="brand-small">Gregg's<br>Restoration<br>Solutions LLC.</div>
-        <div class="nav-item active">Tax Calculator</div>
-        <div class="nav-item">About</div>
-        <div class="nav-item">Contact</div>
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar no-print">
+    <div>
+      <div class="brand">Gregg's<br><span>Restoration</span><br>Solutions LLC.</div>
+      <div class="nav-item active"><span class="nav-icon">🧾</span> Tax Calculator</div>
+      <div class="nav-item"><span class="nav-icon">ℹ️</span> About</div>
+      <div class="nav-item"><span class="nav-icon">📞</span> Contact</div>
+      <div class="sidebar-badge">
+        <strong>Local Tool</strong><br>
+        No data is ever sent or saved. Everything stays in your browser.
       </div>
+    </div>
+    <div class="sidebar-footer">
+      © Gregg's Restoration Solutions LLC.<br>Business utility — internal use only.
+    </div>
+  </aside>
 
-      <div class="sidebar-footer">
-        © Gregg's Restoration Solutions LLC.<br>
-        Business utility tool.
-      </div>
-    </aside>
+  <!-- Main -->
+  <main class="main">
+    <div class="content-shell">
 
-    <main class="main">
-      <div class="content-shell">
-        <header class="logo-hero no-print">
-          <div class="logo-box" id="logoBox">
-            <img src="GSR Logo.png" alt="Gregg's Restoration Solutions LLC Logo">
+      <!-- Hero -->
+      <header class="hero no-print">
+        <div class="hero-logo">
+          <img src="GSR Logo.png" alt="Gregg's Restoration Solutions LLC Logo">
+        </div>
+        <div class="hero-text">
+          <h1>Customer Check &amp; Sales Tax Calculator</h1>
+          <p>Enter a check total and state tax rate — get the pre-tax subtotal and tax amount instantly. Generate a clean printable report for bookkeeping.</p>
+          <div class="session-pill"><span class="dot"></span> Session only — no data stored</div>
+        </div>
+      </header>
+
+      <!-- Step 1: Start Here -->
+      <section class="card no-print" id="startCard">
+        <div class="card-title"><span class="step-badge">1</span> How many checks?</div>
+        <div class="start-row">
+          <div class="field">
+            <label for="numChecks">Number of checks to enter</label>
+            <input type="number" id="numChecks" min="1" max="50" placeholder="e.g. 3">
           </div>
-          <div class="page-title">Customer Check & Sales Tax Calculator</div>
-        </header>
+          <button class="btn-navy" type="button" onclick="generateForms()">Set Up →</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn-ghost btn-sm" type="button" onclick="resetTool()">Reset All</button>
+        </div>
+      </section>
 
-        <section class="card no-print">
-          <h2 class="section-title"><span class="icon">1</span>Start Here</h2>
-          <div class="start-row">
-            <div>
-              <label for="numChecks">How many checks do you plan to enter?</label>
-              <input type="number" id="numChecks" min="1" placeholder="Example: 2">
-            </div>
-            <button class="primary-btn" type="button" onclick="generateForms()">Next</button>
+      <!-- Step 2: Check Details -->
+      <form id="checkForm" class="card hidden no-print">
+        <div class="card-title"><span class="step-badge">2</span> Check Details</div>
+        <div id="checksContainer"></div>
+        <div class="btn-row" style="margin-top:22px;">
+          <button class="btn-gold" type="submit" style="flex:1;">Calculate All Checks</button>
+          <button class="btn-ghost" type="button" onclick="resetTool()">Start Over</button>
+        </div>
+      </form>
+
+      <!-- Step 3: Results -->
+      <section id="resultsSection">
+        <div class="card">
+          <div class="card-title"><span class="step-badge">3</span> Results</div>
+
+          <div id="printHeader" style="display:none; margin-bottom:18px; text-align:center; padding-bottom:14px; border-bottom:1px solid var(--border);">
+            <img src="GSR Logo.png" alt="Gregg's Restoration Solutions LLC" style="max-width:200px; height:auto; display:block; margin:0 auto 10px;">
+            <div style="font-size:1rem; font-weight:900; color:var(--navy);">Gregg's Restoration Solutions LLC.</div>
+            <div style="color:var(--muted); font-size:0.87rem;">41 Adirondack Ave, Spotswood NJ 08884 · (732) 857-5839</div>
+            <div id="printDate" style="color:var(--muted); font-size:0.82rem; margin-top:4px;"></div>
           </div>
 
-          <div class="btn-row">
-            <button class="secondary-btn" type="button" onclick="resetTool()">Reset</button>
-          </div>
-        </section>
+          <!-- Summary cards -->
+          <div class="summary-row" id="summaryCards"></div>
 
-        <form id="checkForm" class="card hidden no-print">
-          <h2 class="section-title"><span class="icon">2</span>Check Details</h2>
-          <div id="checksContainer"></div>
-          <button class="gold-btn" type="submit">Calculate</button>
-        </form>
-
-        <div id="printArea" class="hidden">
-          <div id="companyHeader">
-            <img src="GSR Logo.png" alt="Gregg's Restoration Solutions LLC Logo">
-            <h2>Gregg's Restoration Solutions LLC.</h2>
-            <p>41 Adirondack Ave, Spotswood NJ, 08884</p>
-            <p>Phone: (732) 857 - 5839</p>
-            <p class="print-date" id="printDate"></p>
+          <!-- Table -->
+          <div class="results-table-wrap" style="margin-top:18px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Check No.</th>
+                  <th>State</th>
+                  <th>ZIP</th>
+                  <th>Rate</th>
+                  <th style="text-align:right;">Subtotal</th>
+                  <th style="text-align:right;">Tax</th>
+                  <th style="text-align:right;">Total</th>
+                </tr>
+              </thead>
+              <tbody id="resultsTableBody"></tbody>
+              <tfoot id="resultsTableFoot"></tfoot>
+            </table>
           </div>
-          <div id="results"></div>
         </div>
 
-        <div id="actionButtons" class="no-print">
-          <button class="primary-btn" type="button" onclick="window.print()">Print / Save as PDF</button>
-          <button class="secondary-btn" type="button" onclick="exportToCSV()">Export to CSV</button>
+        <!-- Action bar -->
+        <div class="action-bar no-print" id="actionBar">
+          <button class="btn-navy" type="button" onclick="openPrintableReport()">📄 Open Printable Report</button>
+          <button class="btn-gold" type="button" onclick="window.print()">🖨 Quick Print</button>
+          <button class="btn-outline" type="button" onclick="downloadPDF()">⬇️ Download PDF</button>
+          <button class="btn-ghost" type="button" onclick="resetTool()">Start Over</button>
         </div>
+      </section>
 
-        <div class="privacy-note no-print">
-          Your data is never stored. This session ends when you close or refresh the page.
-        </div>
+      <div class="privacy-note no-print">
+        🔒 Your data is never stored or transmitted. This session resets when you close or refresh the page.
       </div>
-    </main>
-  </div>
 
-  <script>
-    const DEFAULT_RATES = {
-      NJ: "6.625",
-      PA: "6.000",
-      NY: "8.000"
-    };
+    </div>
+  </main>
+</div>
 
-    function money(value) {
-      return "$" + Number(value).toFixed(2);
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── Tax rates by state ──
+  const STATE_RATES = {
+    AL:"4.000", AK:"0.000", AZ:"5.600", AR:"6.500", CA:"7.250",
+    CO:"2.900", CT:"6.350", DE:"0.000", FL:"6.000", GA:"4.000",
+    HI:"4.000", ID:"6.000", IL:"6.250", IN:"7.000", IA:"6.000",
+    KS:"6.500", KY:"6.000", LA:"4.450", ME:"5.500", MD:"6.000",
+    MA:"6.250", MI:"6.000", MN:"6.875", MS:"7.000", MO:"4.225",
+    MT:"0.000", NE:"5.500", NV:"6.850", NH:"0.000", NJ:"6.625",
+    NM:"5.125", NY:"8.000", NC:"4.750", ND:"5.000", OH:"5.750",
+    OK:"4.500", OR:"0.000", PA:"6.000", RI:"7.000", SC:"6.000",
+    SD:"4.500", TN:"7.000", TX:"6.250", UT:"6.100", VT:"6.000",
+    VA:"5.300", WA:"6.500", WV:"6.000", WI:"5.000", WY:"4.000", DC:"6.000"
+  };
+
+  const STATE_NAMES = {
+    AL:"Alabama", AK:"Alaska", AZ:"Arizona", AR:"Arkansas", CA:"California",
+    CO:"Colorado", CT:"Connecticut", DE:"Delaware", FL:"Florida", GA:"Georgia",
+    HI:"Hawaii", ID:"Idaho", IL:"Illinois", IN:"Indiana", IA:"Iowa",
+    KS:"Kansas", KY:"Kentucky", LA:"Louisiana", ME:"Maine", MD:"Maryland",
+    MA:"Massachusetts", MI:"Michigan", MN:"Minnesota", MS:"Mississippi", MO:"Missouri",
+    MT:"Montana", NE:"Nebraska", NV:"Nevada", NH:"New Hampshire", NJ:"New Jersey",
+    NM:"New Mexico", NY:"New York", NC:"North Carolina", ND:"North Dakota", OH:"Ohio",
+    OK:"Oklahoma", OR:"Oregon", PA:"Pennsylvania", RI:"Rhode Island", SC:"South Carolina",
+    SD:"South Dakota", TN:"Tennessee", TX:"Texas", UT:"Utah", VT:"Vermont",
+    VA:"Virginia", WA:"Washington", WV:"West Virginia", WI:"Wisconsin", WY:"Wyoming", DC:"D.C."
+  };
+
+  function money(v) {
+    return "$" + Number(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function fmtRate(v) {
+    return Number(v).toFixed(3).replace(/0+$/, "").replace(/\.$/, "") + "%";
+  }
+
+  function cleanZip(raw) {
+    return String(raw || "").replace(/\D/g, "").slice(0, 5);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 2600);
+  }
+
+  function applyStateRate(index) {
+    const sel = document.querySelector(`[name="state${index}"]`);
+    const rateInput = document.querySelector(`[name="rate${index}"]`);
+    if (sel && rateInput && STATE_RATES[sel.value]) {
+      rateInput.value = STATE_RATES[sel.value];
+      updatePreview(index);
+    }
+  }
+
+  function updatePreview(index) {
+    const totalInput = document.querySelector(`[name="total${index}"]`);
+    const rateInput = document.querySelector(`[name="rate${index}"]`);
+    const preview = document.getElementById(`preview${index}`);
+    if (!totalInput || !rateInput || !preview) return;
+
+    const total = parseFloat(totalInput.value);
+    const rate = parseFloat(rateInput.value);
+
+    if (!isNaN(total) && total > 0 && !isNaN(rate) && rate >= 0) {
+      const taxRate = rate / 100;
+      const subtotal = total / (1 + taxRate);
+      const tax = total - subtotal;
+      preview.classList.add("active");
+      document.getElementById(`prev-sub${index}`).textContent = money(subtotal);
+      document.getElementById(`prev-tax${index}`).textContent = money(tax);
+      document.getElementById(`prev-rate${index}`).textContent = fmtRate(rate);
+    } else {
+      preview.classList.remove("active");
+    }
+  }
+
+  function generateForms() {
+    const n = parseInt(document.getElementById("numChecks").value, 10);
+    if (isNaN(n) || n < 1) {
+      alert("Please enter how many checks you want to calculate.");
+      return;
+    }
+    if (n > 50) {
+      alert("Maximum 50 checks per session.");
+      return;
     }
 
-    function percent(value) {
-      return Number(value).toFixed(3).replace(/0+$/, "").replace(/\\.$/, "") + "%";
+    const container = document.getElementById("checksContainer");
+    container.innerHTML = "";
+    document.getElementById("resultsSection").classList.remove("visible");
+    document.getElementById("actionBar").classList.remove("visible");
+
+    // Build state options once
+    const stateOptions = `<option value="">Select state</option>` +
+      Object.entries(STATE_NAMES).map(([code, name]) =>
+        `<option value="${code}">${name} (${code})</option>`
+      ).join("");
+
+    for (let i = 1; i <= n; i++) {
+      const div = document.createElement("div");
+      div.className = "check-entry";
+      div.innerHTML = `
+        <div class="check-header">
+          <div class="check-label">✓ Check ${i}</div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>Customer / Business Name <span class="optional">(optional)</span></label>
+            <input type="text" name="name${i}" placeholder="e.g. ABC Roofing Co.">
+          </div>
+
+          <div class="field">
+            <label>Check Date <span class="optional">(optional)</span></label>
+            <input type="date" name="date${i}">
+          </div>
+
+          <div class="field">
+            <label>Check Number <span class="optional">(optional)</span></label>
+            <input type="text" name="checkno${i}" placeholder="e.g. 4821">
+          </div>
+
+          <div class="field">
+            <label>Total Amount on Check</label>
+            <input type="number" step="0.01" min="0" name="total${i}" required
+              placeholder="e.g. 1250.00"
+              oninput="updatePreview(${i})">
+          </div>
+
+          <div class="field">
+            <label>State</label>
+            <select name="state${i}" required onchange="applyStateRate(${i})">
+              ${stateOptions}
+            </select>
+            <span class="hint">Selecting a state fills the default statewide rate.</span>
+          </div>
+
+          <div class="field">
+            <label>ZIP Code <span class="optional">(optional)</span></label>
+            <input type="text" inputmode="numeric" maxlength="10" name="zip${i}" placeholder="e.g. 08884">
+            <span class="hint">
+              <a href="https://www.taxjar.com/sales-tax-calculator" target="_blank" rel="noopener noreferrer"
+                style="color:var(--gold-dark); font-weight:700;">Look up exact local rate on TaxJar ↗</a>
+            </span>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <label>Tax Rate %</label>
+          <input type="number" step="0.001" min="0" name="rate${i}" required
+            placeholder="e.g. 6.625"
+            oninput="updatePreview(${i})">
+          <div class="tax-helper">Enter the percentage as a number — e.g. <strong>6.625</strong>, not 0.06625.</div>
+        </div>
+
+        <!-- Live preview -->
+        <div class="live-preview" id="preview${i}">
+          <div class="preview-item">
+            <span class="lbl">Rate</span>
+            <span class="val" id="prev-rate${i}">—</span>
+          </div>
+          <div class="preview-item">
+            <span class="lbl">Pre-tax Subtotal</span>
+            <span class="val" id="prev-sub${i}">—</span>
+          </div>
+          <div class="preview-item">
+            <span class="lbl">Tax Amount</span>
+            <span class="val" id="prev-tax${i}">—</span>
+          </div>
+        </div>
+      `;
+      container.appendChild(div);
     }
 
-    function cleanZip(raw) {
-      return String(raw || "").replace(/\\D/g, "").slice(0, 5);
-    }
+    document.getElementById("checkForm").classList.remove("hidden");
+    document.getElementById("checkForm").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
-    function openTaxLookup(index) {
-      window.open(
-        "https://www.taxjar.com/sales-tax-calculator",
-        "_blank",
-        "noopener,noreferrer,width=1050,height=850"
-      );
-    }
+  // ── Calculate ──
+  document.getElementById("checkForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-    function applyStateRate(index) {
-      const stateSelect = document.querySelector(`[name="state${index}"]`);
-      const rateInput = document.querySelector(`[name="rate${index}"]`);
-      if (stateSelect && rateInput && DEFAULT_RATES[stateSelect.value]) {
-        rateInput.value = DEFAULT_RATES[stateSelect.value];
-      }
-    }
+    const n = parseInt(document.getElementById("numChecks").value, 10);
+    const fd = new FormData(e.target);
+    const tbody = document.getElementById("resultsTableBody");
+    const tfoot = document.getElementById("resultsTableFoot");
+    const summaryCards = document.getElementById("summaryCards");
 
-    function generateForms() {
-      const numChecks = parseInt(document.getElementById("numChecks").value, 10);
-      const container = document.getElementById("checksContainer");
+    tbody.innerHTML = "";
+    tfoot.innerHTML = "";
+    summaryCards.innerHTML = "";
+    window.reportItems = [];
 
-      container.innerHTML = "";
-      document.getElementById("printArea").classList.add("hidden");
-      document.getElementById("actionButtons").classList.remove("visible");
+    let totSub = 0, totTax = 0, totTotal = 0;
 
-      if (isNaN(numChecks) || numChecks < 1) {
-        alert("Please enter how many checks you want to calculate.");
+    for (let i = 1; i <= n; i++) {
+      const name    = fd.get(`name${i}`)   || "—";
+      const date    = fd.get(`date${i}`)   || "—";
+      const checkno = fd.get(`checkno${i}`)|| "—";
+      const zip     = cleanZip(fd.get(`zip${i}`)) || "—";
+      const state   = fd.get(`state${i}`);
+      const total   = parseFloat(fd.get(`total${i}`));
+      const rate    = parseFloat(fd.get(`rate${i}`));
+
+      if (!state || isNaN(total) || isNaN(rate)) {
+        alert(`Please complete all required fields on Check ${i}.`);
         return;
       }
 
-      for (let i = 1; i <= numChecks; i++) {
-        const div = document.createElement("div");
-        div.className = "check-entry";
-        div.innerHTML = `
-          <div class="check-tab">Check ${i}</div>
+      const taxRate  = rate / 100;
+      const subtotal = total / (1 + taxRate);
+      const tax      = total - subtotal;
 
-          <div class="grid-2">
-            <div>
-              <label>Business/Customer Name <span class="optional">(optional)</span></label>
-              <input type="text" name="name${i}" placeholder="Customer or business name">
-            </div>
+      totSub   += subtotal;
+      totTax   += tax;
+      totTotal += total;
 
-            <div>
-              <label>Check Date <span class="optional">(optional)</span></label>
-              <input type="date" name="date${i}">
-            </div>
+      window.reportItems = window.reportItems || [];
+      window.reportItems.push({ check:i, customer:name, date, checkno, zip, state, rate, subtotal, tax, total });
 
-            <div>
-              <label>Check Number <span class="optional">(optional)</span></label>
-              <input type="text" name="checkno${i}" placeholder="Example: 123">
-            </div>
-
-            <div>
-              <label>Total Amount on Check</label>
-              <input type="number" step="0.01" min="0" name="total${i}" required placeholder="Example: 550.00">
-            </div>
-
-            <div>
-              <label>State</label>
-              <select name="state${i}" required onchange="applyStateRate(${i})">
-                <option value="">Select</option>
-                <option value="NJ">New Jersey</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="NY">New York</option>
-              </select>
-              <span class="small-note">Selecting a state fills in a default rate. Confirm local rates when needed.</span>
-            </div>
-
-            <div class="lookup-stack">
-              <label>ZIP Code <span class="optional">(optional)</span></label>
-              <input type="text" inputmode="numeric" maxlength="10" name="zip${i}" id="zip${i}" placeholder="Example: 08884">
-              <button type="button" onclick="openTaxLookup(${i})">Find Tax Rate on TaxJar</button>
-            </div>
-          </div>
-
-          <label>Tax Rate %</label>
-          <input type="number" step="0.001" min="0" name="rate${i}" required placeholder="Example: 6.625">
-
-          <div class="tax-helper">
-            To verify the latest local rate, click <strong>Find Tax Rate on TaxJar</strong>, enter the ZIP code on TaxJar, then type the shown percentage here.
-            Example: enter <strong>6.625</strong>, not 0.06625.
-          </div>
-        `;
-
-        container.appendChild(div);
-      }
-
-      document.getElementById("checkForm").classList.remove("hidden");
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${i}</td>
+        <td>${name}</td>
+        <td>${date}</td>
+        <td>${checkno}</td>
+        <td>${state}</td>
+        <td>${zip}</td>
+        <td>${fmtRate(rate)}</td>
+        <td class="td-money">${money(subtotal)}</td>
+        <td class="td-money">${money(tax)}</td>
+        <td class="td-money td-total">${money(total)}</td>
+      `;
+      tbody.appendChild(tr);
     }
 
-    document.getElementById("checkForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    window.reportTotals = { subtotal: totSub, tax: totTax, total: totTotal };
 
-      const resultsDiv = document.getElementById("results");
-      const formData = new FormData(e.target);
-      const numChecks = parseInt(document.getElementById("numChecks").value, 10);
+    // Totals footer row
+    tfoot.innerHTML = `
+      <tr class="tfoot-row">
+        <td colspan="7" style="font-weight:900; color:var(--navy);">TOTALS</td>
+        <td class="td-money">${money(totSub)}</td>
+        <td class="td-money">${money(totTax)}</td>
+        <td class="td-money td-total">${money(totTotal)}</td>
+      </tr>
+    `;
 
-      resultsDiv.innerHTML = "";
-      document.getElementById("printDate").textContent = "Printed: " + new Date().toLocaleString();
+    // Summary cards
+    summaryCards.innerHTML = `
+      <div class="summary-card">
+        <div class="sc-label">Total Subtotal</div>
+        <div class="sc-value">${money(totSub)}</div>
+      </div>
+      <div class="summary-card">
+        <div class="sc-label">Total Tax</div>
+        <div class="sc-value">${money(totTax)}</div>
+      </div>
+      <div class="summary-card grand">
+        <div class="sc-label">Grand Total</div>
+        <div class="sc-value">${money(totTotal)}</div>
+      </div>
+    `;
 
-      let totalSubtotal = 0;
-      let totalTax = 0;
-      let totalTotal = 0;
+    // Print header date
+    document.getElementById("printDate").textContent = "Generated: " + new Date().toLocaleString();
+    document.getElementById("printHeader").style.display = "block";
 
-      for (let i = 1; i <= numChecks; i++) {
-        const name = formData.get(`name${i}`) || "N/A";
-        const date = formData.get(`date${i}`) || "N/A";
-        const checkno = formData.get(`checkno${i}`) || "N/A";
-        const zip = cleanZip(formData.get(`zip${i}`)) || "N/A";
-        const total = parseFloat(formData.get(`total${i}`));
-        const state = formData.get(`state${i}`);
-        const ratePercent = parseFloat(formData.get(`rate${i}`));
+    document.getElementById("resultsSection").classList.add("visible");
+    document.getElementById("actionBar").classList.add("visible");
+    document.getElementById("resultsSection").scrollIntoView({ behavior: "smooth", block: "start" });
 
-        if (!state || isNaN(total) || isNaN(ratePercent)) {
-          alert(`Please complete Check ${i}.`);
-          return;
-        }
+    showToast(`✓ Calculated ${n} check${n > 1 ? "s" : ""} successfully`);
+  });
 
-        const taxRate = ratePercent / 100;
-        const subtotal = total / (1 + taxRate);
-        const tax = total - subtotal;
+  // ── Download PDF ──
+  function downloadPDF() {
+    if (!window.reportItems || !window.reportItems.length) { showToast("Calculate first."); return; }
 
-        totalSubtotal += subtotal;
-        totalTax += tax;
-        totalTotal += total;
+    // Load logo first, then build PDF (falls back gracefully if logo is missing)
+    const img = new Image();
+    img.onload = () => buildPDF(img);
+    img.onerror = () => buildPDF(null);
+    img.src = "GSR Logo.png";
+  }
 
-        const result = document.createElement("div");
-        result.className = "result";
-        result.innerHTML = `
-          <h3>Check ${i} - ${state}</h3>
-          <div class="result-grid">
-            <p class="result-line"><strong>Customer:</strong> ${name}</p>
-            <p class="result-line"><strong>Date:</strong> ${date}</p>
-            <p class="result-line"><strong>Check No.:</strong> ${checkno}</p>
-            <p class="result-line"><strong>ZIP:</strong> ${zip}</p>
-            <p class="result-line"><strong>Tax Rate:</strong> ${percent(ratePercent)}</p>
-            <p class="result-line"><strong>Total on Check:</strong> <span class="money">${money(total)}</span></p>
-            <p class="result-line"><strong>Subtotal before tax:</strong> <span class="money">${money(subtotal)}</span></p>
-            <p class="result-line"><strong>Tax:</strong> <span class="money">${money(tax)}</span></p>
-          </div>
-        `;
-        resultsDiv.appendChild(result);
-      }
+  function buildPDF(logoImg) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "letter" });
+    const totals = window.reportTotals || { subtotal: 0, tax: 0, total: 0 };
+    const now = new Date().toLocaleString();
 
-      const summary = document.createElement("div");
-      summary.className = "result summary";
-      summary.innerHTML = `
-        <h3>Summary Totals</h3>
-        <div class="result-grid">
-          <p class="result-line"><strong>Total Subtotal:</strong> <span class="money">${money(totalSubtotal)}</span></p>
-          <p class="result-line"><strong>Total Tax:</strong> <span class="money">${money(totalTax)}</span></p>
-          <p class="result-line"><strong>Grand Total:</strong> <span class="money">${money(totalTotal)}</span></p>
-        </div>
-      `;
-      resultsDiv.appendChild(summary);
+    const navy  = [6, 40, 79];
+    const gold  = [200, 161, 58];
+    const white = [255, 255, 255];
+    const goldSoft = [247, 239, 216];
+    const green = [5, 122, 61];
 
-      document.getElementById("printArea").classList.remove("hidden");
-      document.getElementById("actionButtons").classList.add("visible");
-      document.getElementById("printArea").scrollIntoView({ behavior: "smooth" });
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+
+    // Header band is taller when logo is present
+    const bandH = logoImg ? 72 : 54;
+
+    // ── Gold top bar ──
+    doc.setFillColor(...gold);
+    doc.rect(0, 0, pageW, 7, "F");
+
+    // ── Navy header band ──
+    doc.setFillColor(...navy);
+    doc.rect(0, 7, pageW, bandH, "F");
+
+    // ── Logo (left side of header) ──
+    if (logoImg) {
+      // Convert to canvas to get base64
+      const canvas = document.createElement("canvas");
+      const scale = 140 / logoImg.naturalWidth;  // target width 140pt
+      canvas.width  = logoImg.naturalWidth;
+      canvas.height = logoImg.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(logoImg, 0, 0);
+      const imgData = canvas.toDataURL("image/png");
+      const logoW = 140;
+      const logoH = logoImg.naturalHeight * scale;
+      const logoY = 7 + (bandH - logoH) / 2;  // vertically centred in band
+      doc.addImage(imgData, "PNG", 36, logoY, logoW, logoH);
+    }
+
+    // Text starts after logo (or at left margin if no logo)
+    const textX = logoImg ? 190 : 36;
+    const midY  = 7 + bandH / 2;
+
+    // Company name
+    doc.setTextColor(...white);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(15);
+    doc.text("Gregg's Restoration Solutions LLC.", textX, midY - 8);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.setTextColor(197, 212, 232);
+    doc.text("41 Adirondack Ave, Spotswood NJ 08884  ·  (732) 857-5839", textX, midY + 8);
+
+    // Report title right-aligned
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(...gold);
+    doc.text("Check Tax Breakdown Report", pageW - 36, midY - 8, { align: "right" });
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+    doc.setTextColor(197, 212, 232);
+    doc.text("Generated: " + now, pageW - 36, midY + 8, { align: "right" });
+
+    // ── Table ──
+    const tableRows = window.reportItems.map(r => [
+      r.check,
+      r.customer,
+      r.date,
+      r.checkno,
+      r.state,
+      r.zip,
+      fmtRate(r.rate),
+      money(r.subtotal),
+      money(r.tax),
+      money(r.total)
+    ]);
+
+    // Totals footer row
+    tableRows.push([
+      { content: "TOTALS", colSpan: 7, styles: { fontStyle: "bold", halign: "right", fillColor: goldSoft, textColor: navy } },
+      { content: money(totals.subtotal), styles: { fontStyle: "bold", halign: "right", fillColor: goldSoft, textColor: navy } },
+      { content: money(totals.tax),      styles: { fontStyle: "bold", halign: "right", fillColor: goldSoft, textColor: navy } },
+      { content: money(totals.total),    styles: { fontStyle: "bold", halign: "right", fillColor: goldSoft, textColor: green } }
+    ]);
+
+    doc.autoTable({
+      startY: 7 + bandH + 14,
+      head: [["#", "Customer", "Date", "Check No.", "State", "ZIP", "Rate", "Subtotal", "Tax", "Total"]],
+      body: tableRows,
+      theme: "grid",
+      styles: {
+        font: "helvetica",
+        fontSize: 9,
+        cellPadding: 6,
+        valign: "middle",
+        overflow: "linebreak"
+      },
+      headStyles: {
+        fillColor: navy,
+        textColor: white,
+        fontStyle: "bold",
+        fontSize: 9
+      },
+      alternateRowStyles: { fillColor: [248, 250, 253] },
+      columnStyles: {
+        0:  { cellWidth: 24,  halign: "center" },
+        1:  { cellWidth: 110 },
+        2:  { cellWidth: 72 },
+        3:  { cellWidth: 68 },
+        4:  { cellWidth: 38,  halign: "center" },
+        5:  { cellWidth: 46,  halign: "center" },
+        6:  { cellWidth: 52,  halign: "right" },
+        7:  { cellWidth: 78,  halign: "right", fontStyle: "bold" },
+        8:  { cellWidth: 70,  halign: "right", fontStyle: "bold" },
+        9:  { cellWidth: 78,  halign: "right", fontStyle: "bold", textColor: green }
+      },
+      margin: { left: 36, right: 36 }
     });
 
-    function exportToCSV() {
-      const rows = [];
-      rows.push(["Check #", "Customer", "Date", "Check No.", "ZIP", "Tax Rate", "Total", "Subtotal", "Tax"].join(","));
+    // ── Footer note ──
+    const finalY = doc.lastAutoTable.finalY + 14;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7.5);
+    doc.setTextColor(102, 112, 133);
+    doc.text(
+      "This report was generated from a browser session. No customer data is saved or stored by the calculator.",
+      36, Math.min(finalY, pageH - 28)
+    );
 
-      document.querySelectorAll(".result").forEach(block => {
-        if (block.querySelector("h3")?.textContent.includes("Summary")) return;
-
-        const checkNum = block.querySelector("h3")?.textContent?.split(" ")[1] || "";
-        const values = Array.from(block.querySelectorAll(".result-line")).map(line => {
-          const raw = line.textContent.split(":").slice(1).join(":").trim().replace(/\\$/g, "");
-          return `"${raw.replace(/"/g, '""')}"`;
-        });
-
-        rows.push([`"${checkNum}"`, ...values].join(","));
-      });
-
-      const blob = new Blob([rows.join("\\n")], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-
-      link.href = url;
-      link.download = "greggs_tax_summary.csv";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    // ── Page numbers ──
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let p = 1; p <= pageCount; p++) {
+      doc.setPage(p);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(160, 170, 185);
+      doc.text(`Page ${p} of ${pageCount}`, pageW - 36, pageH - 14, { align: "right" });
     }
 
-    function resetTool() {
-      document.getElementById("numChecks").value = "";
-      document.getElementById("checksContainer").innerHTML = "";
-      document.getElementById("results").innerHTML = "";
-      document.getElementById("checkForm").classList.add("hidden");
-      document.getElementById("printArea").classList.add("hidden");
-      document.getElementById("actionButtons").classList.remove("visible");
-    }
-  </script>
+    const filename = `GRS_TaxReport_${new Date().toISOString().slice(0,10)}.pdf`;
+    doc.save(filename);
+    showToast("📄 PDF downloaded!");
+  }
+
+  // ── Printable Report (popup) ──
+  function openPrintableReport() {
+    if (!window.reportItems || !window.reportItems.length) { showToast("Calculate first."); return; }
+
+    const w = window.open("", "_blank", "noopener,noreferrer,width=1080,height=920");
+    if (!w) { alert("Pop-up blocked. Allow pop-ups for this page and try again."); return; }
+
+    const totals = window.reportTotals || { subtotal:0, tax:0, total:0 };
+
+    const rows = window.reportItems.map(r => `
+      <tr>
+        <td>${r.check}</td>
+        <td>${r.customer}</td>
+        <td>${r.date}</td>
+        <td>${r.checkno}</td>
+        <td>${r.state}</td>
+        <td>${r.zip}</td>
+        <td>${fmtRate(r.rate)}</td>
+        <td class="m">${money(r.subtotal)}</td>
+        <td class="m">${money(r.tax)}</td>
+        <td class="m grand">${money(r.total)}</td>
+      </tr>`).join("");
+
+    w.document.write(`<!DOCTYPE html><html><head>
+      <meta charset="UTF-8">
+      <title>Gregg's Restoration Solutions — Tax Report</title>
+      <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;padding:28px;color:#0b2344}
+        .wrap{max-width:1100px;margin:0 auto;background:#fff;border:1px solid #d6deeb;border-radius:14px;overflow:hidden;box-shadow:0 16px 40px rgba(6,40,79,.1)}
+        .letterhead{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 26px;border-top:7px solid #c8a13a;border-bottom:1px solid #d6deeb}
+        .letterhead img{max-width:200px;height:auto;display:block}
+        .ci{text-align:right;font-size:13.5px;line-height:1.5;color:#344054}
+        .ci h1{margin:0 0 5px;font-size:20px;color:#06284f}
+        .band{background:#06284f;color:#fff;padding:16px 26px;display:flex;justify-content:space-between;align-items:center}
+        .band h2{font-size:20px;margin:0}
+        .band span{font-size:13px;color:#c5d4e8}
+        .body{padding:24px 26px 30px}
+        table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+        th{background:#06284f;color:#fff;text-align:left;padding:10px 9px;font-weight:800;border:1px solid #d6deeb}
+        td{padding:9px 9px;border:1px solid #e2e8f0;vertical-align:top}
+        tr:nth-child(even) td{background:#f8fafd}
+        .m{text-align:right;font-weight:700;white-space:nowrap}
+        .grand{color:#057a3d;font-weight:900}
+        tfoot td{background:#f6f0dc!important;font-weight:900;border-top:2px solid #c8a13a;color:#06284f}
+        .totals{width:340px;margin:22px 0 0 auto;border:1px solid #d6deeb;border-radius:10px;overflow:hidden}
+        .t-row{display:flex;justify-content:space-between;padding:11px 14px;border-bottom:1px solid #d6deeb;font-weight:700;font-size:14px}
+        .t-row:last-child{border-bottom:none;background:#f6f0dc;font-size:17px;font-weight:900;color:#057a3d}
+        .footer{margin-top:20px;padding-top:12px;border-top:1px solid #d6deeb;color:#667085;font-size:11.5px;line-height:1.5}
+        .btns{max-width:1100px;margin:0 auto 12px;display:flex;gap:10px}
+        .btns button{padding:11px 16px;border-radius:8px;border:none;font-weight:800;cursor:pointer;font-size:14px}
+        .p{background:#06284f;color:#fff}.c{background:#f2f4f7;color:#06284f;border:1px solid #d6deeb}
+        @media print{body{background:#fff;padding:.3in}.btns{display:none}.wrap{border-radius:0;border:none;box-shadow:none}table{font-size:11px}th,td{padding:7px 6px}}
+      </style>
+    </head><body>
+      <div class="btns">
+        <button class="p" onclick="window.print()">Print / Save as PDF</button>
+        <button class="c" onclick="window.close()">Close</button>
+      </div>
+      <div class="wrap">
+        <div class="letterhead">
+          <img src="GSR Logo.png" alt="Gregg's Restoration Solutions LLC">
+          <div class="ci">
+            <h1>Gregg's Restoration Solutions LLC.</h1>
+            <div>41 Adirondack Ave, Spotswood NJ 08884</div>
+            <div>Phone: (732) 857-5839</div>
+            <div><strong>Report generated:</strong> ${new Date().toLocaleString()}</div>
+          </div>
+        </div>
+        <div class="band"><h2>Check Tax Breakdown Report</h2><span>For bookkeeping and paperwork entry</span></div>
+        <div class="body">
+          <table>
+            <thead><tr>
+              <th>#</th><th>Customer</th><th>Date</th><th>Check No.</th>
+              <th>State</th><th>ZIP</th><th>Tax Rate</th>
+              <th>Subtotal</th><th>Tax</th><th>Total</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+            <tfoot><tr>
+              <td colspan="7" style="font-weight:900">TOTALS</td>
+              <td class="m">${money(totals.subtotal)}</td>
+              <td class="m">${money(totals.tax)}</td>
+              <td class="m grand">${money(totals.total)}</td>
+            </tr></tfoot>
+          </table>
+          <div class="totals">
+            <div class="t-row"><span>Total Subtotal</span><span>${money(totals.subtotal)}</span></div>
+            <div class="t-row"><span>Total Tax</span><span>${money(totals.tax)}</span></div>
+            <div class="t-row"><span>Grand Total</span><span>${money(totals.total)}</span></div>
+          </div>
+          <div class="footer">This report was generated from a browser session. No customer data is saved or stored by the calculator.</div>
+        </div>
+      </div>
+    </body></html>`);
+    w.document.close();
+  }
+
+  // ── Reset ──
+  function resetTool() {
+    document.getElementById("numChecks").value = "";
+    document.getElementById("checksContainer").innerHTML = "";
+    document.getElementById("checkForm").classList.add("hidden");
+    document.getElementById("resultsSection").classList.remove("visible");
+    document.getElementById("actionBar").classList.remove("visible");
+    window.reportItems = [];
+    window.reportTotals = null;
+    document.getElementById("startCard").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+</script>
 </body>
 </html>
